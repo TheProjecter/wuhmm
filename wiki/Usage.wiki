@@ -62,6 +62,7 @@ DBA_2J
 # Plot a CNV.
  
 }}}
+http://wuhmm.googlecode.com/files/cnv7_36.gif
 
 ===Merge and Genotype CNVRs===
 {{{
