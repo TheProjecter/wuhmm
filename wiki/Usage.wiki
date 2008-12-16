@@ -80,21 +80,23 @@ http://wuhmm.googlecode.com/files/cnv.gif
 ===Merge and Genotype CNVRs===
 {{{
 # Merge CNVs into CNV-regions (CNVRs).  Assign each CNVR an identifier starting with strID.
-> cnvrs7<-w_makeCNVRs(cnvs7, strID=1)
 # makeCNVRs returns a list of the following elements:
 #  (1) CNVRs
-#  (2) List of CNV tables.  
-> dim(cnvrs7[[1]])
-[1] 17  6
-# list first 3 CNVRs
-> cnvrs7[[1]][1:3,]
-  cnvrid chr      str      stp  length ave_score
-1      1   7  6413122  8404697 1991576     2.456
-2      2   7  9109176  9545727  436552     2.597
-3      3   7 11668917 12171962  503046     1.572
+#  (2) List of CNV tables.
+> cnvrs<-w_makeCNVRs(cnvsGood, 1)
+> dim(cnvrs[[1]])
+[1] 58  6
+
+# list 3 CNVRs
+> cnvrs[[1]][1:3,]
+  cnvrid chr       str       stp length ave_score
+1      1   1 100982630 101050290  67661     2.942
+2      2   1 171447273 171508979  61707     2.599
+3      3   5  14292154  14539614 247461     2.052
 
 # Assign an inferred genotype to each sample based on the optimal partitioning of the data .
-> g7<-w_genotype(samples$sample_name, cnvrs7[[2]], cnvrs7[[1]])
+# Paramters: sample_names, list of CNV tables and CNVRs from running w_makeCNVRs.
+> cnvrGenos<-w_genotype(samples$sample_name, cnvrs[[2]], cnvrs[[1]])
 
 # Plot all samples together, highlighting samples with 'abnormal' genotypes.
 
