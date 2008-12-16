@@ -1,16 +1,26 @@
 #summary wuHMM instructions
 
-The example R session below describes the process of loading NimbleGen data files, using wuHMM, and plotting the results.  The data files used in the examples below are available for download from [http://compbio.s3.amazonaws.com/demoData.zip here].  Download and decompress (unzip) the compressed demo data file in the same directory that you placed the wuHMM code files.  This data is also available at GEO under accession [http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE5805 GSE5805].  Download the sample text file that contains the demo sample data descriptions [http://wuhmm.googlecode.com/files/project.txt here].
+The example R session below describes the process of loading data files, using wuHMM, and plotting the results.  The data files used in the examples below are available for download from [http://compbio.s3.amazonaws.com/demoData.zip here].  Download and decompress (unzip) the compressed demo data file in the same directory that you placed the wuHMM code files.  This data is also available at GEO under accession [http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE5805 GSE5805].  Download the sample text file that contains the demo sample data descriptions [http://wuhmm.googlecode.com/files/project.txt here].
 
 Launch R.   The following R commands will get you started reading NimbleGen data, and detecting and plotting CNV predictions.  Lines begining with '>' are commands, '#' are comments.
+
 {{{
 # read sample file containing sample and file names
-
 > samples<-read.table("project.txt", sep="\t",quote='', header=TRUE, as.is=TRUE)
-# iPos = 5
-# iChr = 3
-# iSignal = 14
-# cols = 14
+
+# The demo data files are from NimbleGen.
+
+# You need to specify the column that contains the following data:
+# Probe position: iPos = 5
+# Chromosome: iChr = 3
+# Log2(ratio), intensity, read count: iSignal = 14
+
+# Other parameters:
+# Total number of columns in file: cols = 14
+# Chromosome names:
+#   numeric chrs: autos
+#   sex chrs: boolean vector
+# Chromosome format.  Double-digit (i.e. Chr01: prepend0=TRUe), or single (Chr1)?  
 > loadSamples(samples,iPos=5,iSignal=14,iChr=3,ncols=14,autos=c(1:19),sex=c(TRUE,TRUE), prepend0=0)
 
 # decode Chr7
