@@ -2,7 +2,7 @@
 
 The example R session below describes the process of loading data files, using wuHMM, and plotting the results.  The data files used in the examples below are available for download from [http://compbio.s3.amazonaws.com/demoData.zip here].  Download and decompress (unzip) the compressed demo data file in the same directory that you placed the wuHMM code files.  This data is also available at GEO under accession [http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE5805 GSE5805].  Download the sample text file that contains the demo sample data descriptions [http://wuhmm.googlecode.com/files/project.txt here].
 
-Launch R.   The following R commands will get you started reading NimbleGen data, and detecting and plotting CNV predictions.  Lines begining with '>' are commands, '#' are comments.
+Launch R.   The following R commands will get you started reading CGH data, detecting, genotyping, and plotting CNV predictions.  Lines beginning with '>' are commands, '#' are comments.
 
 ===Loading data===
 
@@ -31,45 +31,51 @@ Launch R.   The following R commands will get you started reading NimbleGen data
 
 ===Running wuHMM===
 {{{
-# Decode (or segment) Chr7 on all samples.  wuHMM will output the sample name as it is decoding.
+# Decode (or segment) all samples, all chromosomes (except ChrY).  wuHMM will output the sample name as it is decoding.
 # wuHMM parameters, default parameters listed:
 #    sample_labels (required): must be same as samples$sample_name used in loadSamples.
 #    chrs: Chromosomes to segment
 #    nstay_seed=4:  Number of probes required to 'seed' a region prior to HMM processing.    Increasing this number will reduce the FPR AND sensitivity.
 # Other parameters can be found in funs.R.
-> system.time(cnvs7<-decodeAndPerm(samples$sample_name,chrs=7, nstay_seed=3))
+> system.time(cnvsAll<-decodeAndPerm(samples$sample_name,chrs=c(1:19,'x'), nstay_seed=5))
 AJ
 Balb_cByJ
 C57BL_6J
 C58_J
 DBA_2J
-[1]  48.35  70.01 417.00 163.55 123.97
-> dim(cnvs7)
-[1] 141   9
+[1]  65.07  72.22 427.89 162.55 118.38
+
+# How many CNV predictions?
+> dim(cnvsAll)
+[1] 148   9
 
 # Filter out low-scoring calls
 # Parameters: cnvs, score thresholds for (1) losses, and (2) gains
-> cnvs7<-filterCalls(cnvs7, 1.5, 1.5)
-> dim(cnvs7)
-[1] 25  9
+> cnvsGood<-filterCalls(cnvsAll, 1.5,1)
+> dim(cnvsGood)
+[1] 87  9
 
 # List first 3 CNVs order by str
-> cnvs7[order(cnvs7$str),][1:3,]
-         str      stp num_probes   mean_sig    score     noise median_sig chr name
-112  6413122  8404697         47 -0.5714043 2.456394 0.2677412     -0.638   7 Balb_cByJ
-117  9109176  9545727         40 -0.7248250 2.596971 0.2780237     -0.704   7 C58_J
-215 11668917 12171962         19 -0.4992105 1.572330 0.3283936     -0.534   7 C58_J
-...
+> cnvsGood[order(cnvsGood$str),][1:3,]
+        str     stp num_probes   mean_sig    score     noise median_sig chr name
+132 6110655 6165058          9  0.5220000 1.021709 0.1995345      0.465  17 Balb_cByJ
+28  6413122 8404697         47 -0.5714043 2.456394 0.2677412     -0.638   7 Balb_cByJ
+142 9109176 9545727         40 -0.7248250 2.596971 0.2780237     -0.704   7 C58_J
 
 # Plot a CNV.
 # Parameters (required): sample_name, cnv
 # Other parameters, margin size, y-axis boundaries, etc, can be found in plotting.R.
 # plotReg will display all cnvs supplied if they are within margin distance of the first CNV.
-> plotReg("C58_J", cnvs7[1,])
 
+> plotReg('Balb_cByJ',cnvsGood['133',], marg=50)
 }}}
-http://wuhmm.googlecode.com/files/cnvMarg50.gif 
+http://wuhmm.googlecode.com/files/cnvMarg50.gif
+{{{
+# Now zoom in (default setting):
+> plotReg('Balb_cByJ',cnvsGood['133',])
+}}}
 http://wuhmm.googlecode.com/files/cnv.gif
+
 
 ===Merge and Genotype CNVRs===
 {{{
