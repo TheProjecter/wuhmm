@@ -4,11 +4,14 @@ The example R session below describes the process of loading data files, using w
 
 Launch R.   The following R commands will get you started reading NimbleGen data, and detecting and plotting CNV predictions.  Lines begining with '>' are commands, '#' are comments.
 
+`> samples<-read.table("project.txt", sep="\t",quote='', header=TRUE, as.is=TRUE)`
+
 {{{
-# read sample file containing sample and file names
+# Read sample file containing sample and file names.
 > samples<-read.table("project.txt", sep="\t",quote='', header=TRUE, as.is=TRUE)
 
-# The demo data files are from NimbleGen.
+# Prepare demo data files for analysis.
+# The demo data files are from NimbleGen, however other data types should be understandable by the algorithm, provided that the file format is specified correctly.
 
 # You need to specify the column that contains the following data:
 # Probe position: iPos = 5
@@ -23,7 +26,12 @@ Launch R.   The following R commands will get you started reading NimbleGen data
 # Chromosome format.  Double-digit (i.e. Chr01: prepend0=TRUe), or single (Chr1)?  
 > loadSamples(samples,iPos=5,iSignal=14,iChr=3,ncols=14,autos=c(1:19),sex=c(TRUE,TRUE), prepend0=0)
 
-# decode Chr7
+# Decode (or segment) Chr7 on all samples.  wuHMM will output the sample name as it is decoding.
+# wuHMM parameters, default parameters listed:
+#    sample_labels (required): must be same as samples$sample_name used in loadSamples.
+#    chrs: Chromosomes to segment
+#    nstay_seed=4:  Number of probes required to 'seed' a region prior to HMM processing.    Increasing this number will reduce the FPR AND sensitivity.
+# Other parameters can be found in funs.R.
 > system.time(cnvs7<-decodeAndPerm(samples$sample_name,chrs=7, nstay_seed=3))
 AJ
 Balb_cByJ
@@ -34,16 +42,19 @@ DBA_2J
 > dim(cnvs7)
 [1] 141   9
 
-# filter out low-scoring calls
+# Filter out low-scoring calls
+# Parameters: cnvs, score thresholds for (1) losses, and (2) gains
 > cnvs7<-filterCalls(cnvs7, 1.5, 1.5)
 > dim(cnvs7)
 [1] 25  9
 
-# merge CNVs into CNV-regions (CNVRs)
-> cnvrs7<-makeCNVRs(cnvs7, 1)
+# Merge CNVs into CNV-regions (CNVRs).  
+# Assign each CNVR an identifier starting with strID.
+> cnvrs7<-makeCNVRs(cnvs7, strID=1)
 > dim(cnvrs7[[1]])
 [1] 17  6
 
-# Genotype CNVRs
+# Genotype CNVRs.
+
 > g7<-w_genotype(samples$sample_name, cnvrs7[[2]], cnvrs7[[1]])
 }}}
