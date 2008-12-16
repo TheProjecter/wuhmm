@@ -1,5 +1,5 @@
-* R 1.5 (or more recent):  If you don't already have R installed, go to CRAN where you can grab a copy.
-* The R _cluster_ package, obtainable from CRAN.
-* The R _geneplotter_ package, available from BioConductor.
-* Python 2.4: This should be included with you Linux distribution.  If not, go to python.org to get a copy.
-* ghmm:  This library is available from sourceforge and installation instructions are available at ghmm.org.  This installation can be a bit complicated so I posted my installation notes here.  NOTE: You should replace model.c with a modified version which is available here.  This should be done *BEFORE* running the installation script.
+  * R 1.5 (or more recent):  If you don't already have R installed, go to CRAN where you can grab a copy.
+  * The R _cluster_ package, obtainable from CRAN.
+  * The R _geneplotter_ package, available from BioConductor.
+  * Python 2.4: This should be included with you Linux distribution.  If not, go to python.org to get a copy.
+  * ghmm:  This library is available from sourceforge and installation instructions are available at ghmm.org.  This installation can be a bit complicated so I posted my installation notes here.  NOTE: You should replace model.c with a modified version which is available here.  This should be done *BEFORE* running the installation script.
