@@ -68,7 +68,7 @@ DBA_2J
 > plotReg("C58_J", cnvs7[1,])
 
 }}}
-http://wuhmm.googlecode.com/files/cnvMarg50.gif
+http://wuhmm.googlecode.com/files/cnvMarg50.gif http://wuhmm.googlecode.com/files/cnv.gif
 
 ===Merge and Genotype CNVRs===
 {{{
