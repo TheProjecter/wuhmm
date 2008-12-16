@@ -42,10 +42,10 @@ makeChrs<-function(chrs=c(1:19),x=TRUE, y=TRUE, prepend0=FALSE){
   }
     
   if(x){
-    ans<-append(ans, 'chrX');
+    ans<-append(ans, 'chrx');
   }
   if(y){
-    ans<-append(ans, 'chrY');
+    ans<-append(ans, 'chry');
   }  
   ans;
 }
