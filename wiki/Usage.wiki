@@ -99,7 +99,12 @@ http://wuhmm.googlecode.com/files/cnv.gif
 > cnvrGenos<-w_genotype(samples$sample_name, cnvrs[[2]], cnvrs[[1]])
 
 # Plot all samples together, highlighting samples with 'abnormal' genotypes.
-
+# First a CNVR comprised of gains
+> w_plotCNVR(cnvrGenos, 3)
 }}}
-http://wuhmm.googlecode.com/files/cnvr6.gif 
-http://wuhmm.googlecode.com/files/cnvr32.gif
+http://wuhmm.googlecode.com/files/cnvr3.gif
+{{{
+# Now a CNVR comprised of losses
+> w_plotCNVR(cnvrGenos, 26)
+}}}
+http://wuhmm.googlecode.com/files/cnvr26.gif
