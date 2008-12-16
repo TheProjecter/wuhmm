@@ -41,6 +41,7 @@ decodeAndPerm<-function(sample_labels,
   nCNVs<-0;
   for(i in seq(length(sample_labels))){
     sample_label<-sample_labels[i];
+    cat(sample_label,"\n");
     for(chr in chrs){
       fname_cnvs<-paste("cnvs_",sample_label,".csv",sep='');
       dfX<-readNG(sample_label,chr=chr);
@@ -101,9 +102,11 @@ decodeAndPerm<-function(sample_labels,
           colnames(calls)[ncol(calls)]<-"pval";
         }        
       }
-      calls<-cbind(calls,data.frame(chr=rep(chr, nrow(calls))));
-      calls<-cbind(calls,data.frame(name=rep(sample_label, nrow(calls))));
-      allCalls<-rbind(allCalls, calls);
+      if(nrow(calls)>0){
+        calls<-cbind(calls,data.frame(chr=rep(chr, nrow(calls))));
+        calls<-cbind(calls,data.frame(name=rep(sample_label, nrow(calls))));
+        allCalls<-rbind(allCalls, calls);
+      }
     }
   }
   if(nperms>0){
@@ -150,7 +153,6 @@ decode<-function(ng,
       seeds<-mergeSeeds(expandSeeds(ng,seeds,0.25));
     }
     
-    cat(samp,"\n");
     for(i in seq(nrow(seeds))){
       seed<-seeds[i,];
       #cat("seed ",i, seed$str,"-",seed$stp,"\n");
