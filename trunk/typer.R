@@ -42,7 +42,7 @@ w_genotype<-function(snames,cnvBag,cnvrs,nclusts=2:7){
   coding<-data.frame();
   mean_sigs<-data.frame();
 
-  chrs<-unique(cnvrs$chr);
+  chrs<-unique(as.vector(cnvrs$chr));
   for(chr in chrs){
     x<-genotypeChr(snames,cnvBag,cnvrs,chr,nclusts);
     cnvrsOut<-rbind(cnvrsOut, x$cnvrs);
