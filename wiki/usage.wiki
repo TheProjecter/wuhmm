@@ -4,13 +4,12 @@ The example R session below describes the process of loading NimbleGen data file
  
 
 Launch R.   The following R commands will get you started reading NimbleGen data, and detecting and plotting CNV predictions.  Lines begining with '>' are commands, '#' are comments.
-A
 
 `# read sample file containing sample and file names
 
->  samples<-read.table("project.txt", sep="\t",quote='', header=TRUE, as.is=TRUE)
+> samples<-read.table("project.txt", sep="\t",quote='', header=TRUE, as.is=TRUE)
 # iPos = 5
 # iChr = 3
 # iSignal = 14
 # cols = 14
-> system.time(loadSamples(samples,iPos=5,iSignal=14,iChr=3,ncols=14,autos=c(1:19),sex=c(TRUE,TRUE), prepend0=0))`
+>system.time(loadSamples(samples,iPos=5,iSignal=14,iChr=3,ncols=14,autos=c(1:19),sex=c(TRUE,TRUE), prepend0=0))`
