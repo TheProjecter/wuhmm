@@ -24,7 +24,9 @@ Launch R.   The following R commands will get you started reading NimbleGen data
 #   numeric chrs: autos
 #   sex chrs: boolean vector
 # Chromosome format.  Double-digit (i.e. Chr01: prepend0=TRUe), or single (Chr1)?  
-> loadSamples(samples,iPos=5,iSignal=14,iChr=3,ncols=14,autos=c(1:19),sex=c(TRUE,TRUE), prepend0=0)
+> system.time(loadSamples(samples,iPos=5,iSignal=14,iChr=3,ncols=14,autos=c(1:19),sex=c(TRUE,FALSE), prepend0=0))
+[1] 50.14  3.31 56.50  0.00  0.00
+
 }}}
 
 ===Running wuHMM===
