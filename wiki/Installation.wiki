@@ -1,12 +1,4 @@
-#summary One-sentence summary of this page.
-
-= Introduction =
-
-Installation instructions for wuHMM
-
-
-= Details =
-
+#summary Installation instructions
 
 wuHMM prerequisites:
 
