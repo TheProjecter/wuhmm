@@ -27,20 +27,19 @@
 #
 
 w_makeCNVRs<-function(calls,strID=1){
-  chrs<-unique(calls$chr);
+  chrs<-unique(as.vector(calls$chr));
   cnvrs<-data.frame();
   cnvBag<-list();
   
   for(chr in chrs){
     callsX<-calls[calls$chr==chr,];
     x<-makeCNVRs(callsX, strID);
-    cnvrs<-rbind(cnvrs,x[[1]]);
-    for(cnvrid in cnvrs$cnvrid){
+    for(cnvrid in x[[1]]$cnvrid){
       cnvBag[[cnvrid]]<-x[[2]][[cnvrid]];
     }
+    cnvrs<-rbind(cnvrs,x[[1]]);
     strID<-(max(cnvrs$cnvrid)+1);
   }
-
   list(cnvrs=cnvrs, cnvrBag=cnvBag);
 }
 
@@ -48,14 +47,11 @@ w_makeCNVRs<-function(calls,strID=1){
 makeCNVRs<-function(calls, strID=1){
 
   cnvBag<-list();
-
   cur_id<-strID;
   n_added<-0;
-  
   calls<-calls[order(calls$str, calls$stp),];
-  
+
   if(nrow(calls)>1){
-    
     i<-1;
     while(TRUE){
       # last row
@@ -68,7 +64,6 @@ makeCNVRs<-function(calls, strID=1){
       else{
         if(ol(calls[i,], calls[(i+1),])){
           callX<-calls[(i+1),];          
-
           # update cnvrBag
           if(n_added==0){
             cnvBag[[cur_id]]<-data.frame(calls[i:(i+1),]);
@@ -90,6 +85,7 @@ makeCNVRs<-function(calls, strID=1){
         }
         # Doesn't overlap next call
         else{
+              
           if(n_added==0){
             cnvBag[[cur_id]]<-data.frame(calls[i,]);
           }
@@ -101,7 +97,11 @@ makeCNVRs<-function(calls, strID=1){
     }
   }
 
-  cnvrids<-strID:nrow(calls);
+  else{
+    cnvBag[[cur_id]]<-calls[1,];
+  }
+  
+  cnvrids<-strID:cur_id;
   calls<-cbind(calls, cnvrid=cnvrids);
   ave_score<-vector();
   lens<-vector();
@@ -109,7 +109,7 @@ makeCNVRs<-function(calls, strID=1){
     ave_score<-append(ave_score, mean(cnvBag[[calls[i,]$cnvrid]]$score));
     lens<-append(lens, calls[i,]$stp-calls[i,]$str+1);
   }
-   
+
   calls<-cbind(calls, ave_score=round(ave_score,3));
   calls<-cbind(calls, length=lens);
   calls<-calls[,c('cnvrid','chr','str','stp','length','ave_score')];
