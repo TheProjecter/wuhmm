@@ -4,7 +4,7 @@ The example R session below describes the process of loading NimbleGen data file
  
 
 Launch R.   The following R commands will get you started reading NimbleGen data, and detecting and plotting CNV predictions.  Lines begining with '>' are commands, '#' are comments.
-
+{{{
 # read sample file containing sample and file names
 
 > samples<-read.table("project.txt", sep="\t",quote='', header=TRUE, as.is=TRUE)
@@ -37,5 +37,4 @@ DBA_2J
 
 # Genotype CNVRs
 > g7<-w_genotype(samples$sample_name, cnvrs7[[2]], cnvrs7[[1]])
-
-
+}}}
