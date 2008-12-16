@@ -24,6 +24,7 @@
 
 plotReg<-function(sampleName,cnvs=data.frame(),marg=5,ylim=c(-3,3),res=50){
 
+  main<-sampleName;
   chr<-cnvs[1,]$chr
   ng<-readNG(sampleName,chr=chr);
 
@@ -45,7 +46,7 @@ plotReg<-function(sampleName,cnvs=data.frame(),marg=5,ylim=c(-3,3),res=50){
 
   ng<-ng[ng$position>=left & ng$position<=right,];
     
-  main='';
+
   # make colors vector
   clrs<-vector();
   cls<-binColors(ng,res=res);
