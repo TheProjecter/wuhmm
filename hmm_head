@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+import ghmm
+from ghmm import *
+
+def def_cnps(filename,sample_label,positions, signals, states, ab_states):
+    str = 0
+    stp = 0
+    num_probes = 0
+    s = 0
+    mean_sig = 0  
+    count1 = 0
+    count2 = 0
+    i = 0;
+    fname_cnv = open(filename,'w')
+    write_seg(fname_cnv,"str", "stp", "num_probes", "mean_sig")
+    while i < len(signals):
+	if i>len(states):
+            break;			   	
+        for j in ab_states:
+            if(j == states[i]):
+                start = positions[i]
+                stp = positions[i]                
+                s = signals[i]
+                num_probes = 1
+                while(1):
+                    i=i+1
+                    #if i>len(states):
+		    if i>=len(states):
+                        i = i-1;
+                        break;	
+		    if(states[i] != j):
+			i = i-1;
+                        break;
+                    #print repr(num_probes);
+                    stp = positions[i]
+                    s+=signals[i]
+                    num_probes=num_probes+1
+
+                mean_sig = s/num_probes		
+		write_seg(fname_cnv, start, stp, num_probes, mean_sig)
+		
+        i=i+1
+    
+    fname_cnv.close()
+      
+
+def write_seg(filename,start, stp, num_probes, mean_sig):
+    filename.write(str(start)+"\t"+str(stp)+"\t"+str(num_probes)+"\t"+str(mean_sig)+"\n")
+
+def write_num(filename, num):
+    f = open(filename, 'a')
+    f.write(str(num)+"\n")        
+    f.close()   
+
+def write_states(filename, positions,signals,states, divergence):   
+    f = open(filename, 'w')
+    for i in range(len(signals)):	
+	f.write(str(positions[i])+"\t"+str(signals[i])+"\t"+str(states[i])+"\n")        
+
+    f.close()
+    
+def write_states(filename, positions,signals,states,clusts):   
+    f = open(filename, 'w')
+    for i in range(len(signals)):	
+#	if(divergence[i]):
+#            x = str(divergence[i])             
+#        else:
+#            x = "0.0"
+            
+#        f.write(str(positions[i])+"\t"+str(signals[i])+"\t"+str(states[i])+"\t"+x+"\n")
+	f.write(str(positions[i])+"\t"+str(signals[i])+"\t"+str(states[i])+"\t"+str(clusts[i])+"\n")        
+    f.close()
+
+#write a row of emis probs
+def write_emis_row(f, model, nstates):
+    f.write("<tr>")
+    for i in range(nstates):
+        f.write("<td><b>%2.5f</b> " % model.getEmission(i,0)[0])
+	f.write("<i>%2.5f </i>\n" % model.getEmission(i,0)[1])
+	f.write("<b> %2.5f</b> " % model.getEmission(i,1)[0])
+	f.write("<i>%2.5f </i>\n" % model.getEmission(i,1)[1])
+
+#write transistion matrix comprised of rows from state x to states 1 thru j
+def write_trans(f, model, nstates):
+    for j in range(nstates):
+    	f.write("<tr>")
+    	for i in range(nstates):
+        	f.write("<td> %2.5f " % model.getTransition(j,i))
