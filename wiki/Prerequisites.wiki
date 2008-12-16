@@ -1,4 +1,4 @@
-  * R 1.5 (or more recent):  If you don't already have R installed, go to CRAN where you can grab a copy.
+  * R 1.5 (or more recent):  If you don't already have R installed, go to [http://cran.r-project.org/ CRAN] where you can grab a copy.
   * The R _cluster_ package, obtainable from [http://cran.r-project.org/ CRAN].
   * The R _geneplotter_ package, available from [http://www.bioconductor.org/ BioConductor].
   * Python 2.4: This should be included with you Linux distribution.  If not, go to [http://python.org/ python.org] to get a copy.
