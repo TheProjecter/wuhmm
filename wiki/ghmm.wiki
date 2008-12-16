@@ -25,9 +25,9 @@ Checked out revision 2209.
 # See install instructions:
 http://ghmm.sourceforge.net/installation.html
 
-# Replace model.c with file available at:
+# Replace model.c with:
 
-http://groups.google.com/group/wuhmm/files
+http://wuhmm.googlecode.com/files/model.c
 
 # Compile and install ghmm
 [pcahan1@localhost ghmm8]$ cd ghmm/
