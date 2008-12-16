@@ -22,7 +22,7 @@
 #
 #################################################################################
 
-plotReg<-function(sampleName,cnvs=data.frame(),marg=5,ylim=c(-3,3),res=50){
+plotReg<-function(sampleName,cnvs=data.frame(),marg=5,ylim=c(-3,3),res=50, lwd=4){
 
   main<-sampleName;
   chr<-cnvs[1,]$chr
@@ -53,9 +53,10 @@ plotReg<-function(sampleName,cnvs=data.frame(),marg=5,ylim=c(-3,3),res=50){
   x<-rgb(cls,cls,1);
   clrs<-append(clrs, x);
   plot(ng$position,ng$nimblegen_signal, main=main,xlab=paste("Chr",chr,sep=''),ylim=ylim,pch='.',cex=2.45,col=clrs, ylab="log2-ratio");
+  
   lines(x=c(0,nrow(ng)), y=c(0,0));
   if(nrow(cnvs)>0){
-    plot_cnv_lines(cnvs, cl='red', lty=1);
+    plot_cnv_lines(cnvs, cl='red', lty=1, lwd=lwd);
   }
   
 }
@@ -73,10 +74,10 @@ binColors<-function(ng, res=100){
   bins;
 }
 
-plot_cnv_lines<-function(hmm_cnvs, cl=4, lty=1){
+plot_cnv_lines<-function(hmm_cnvs, cl=4, lty=1, lwd=2){
   for(i in seq(nrow(hmm_cnvs))){
     seg<-hmm_cnvs[i,];
-    lines(c(seg$str, seg$stp), c(seg$mean_sig, seg$mean_sig), col=cl, lty=lty, lwd=2);
+    lines(c(seg$str, seg$stp), c(seg$mean_sig, seg$mean_sig), col=cl, lty=lty, lwd=lwd);
   }
 }
 
