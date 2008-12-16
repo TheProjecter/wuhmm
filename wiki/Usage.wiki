@@ -4,7 +4,7 @@ The example R session below describes the process of loading data files, using w
 
 Launch R.   The following R commands will get you started reading NimbleGen data, and detecting and plotting CNV predictions.  Lines begining with '>' are commands, '#' are comments.
 
-`> samples<-read.table("project.txt", sep="\t",quote='', header=TRUE, as.is=TRUE)`
+===Loading data===
 
 {{{
 # Read sample file containing sample and file names.
@@ -25,7 +25,10 @@ Launch R.   The following R commands will get you started reading NimbleGen data
 #   sex chrs: boolean vector
 # Chromosome format.  Double-digit (i.e. Chr01: prepend0=TRUe), or single (Chr1)?  
 > loadSamples(samples,iPos=5,iSignal=14,iChr=3,ncols=14,autos=c(1:19),sex=c(TRUE,TRUE), prepend0=0)
+}}}
 
+===Running wuHMM===
+{{{
 # Decode (or segment) Chr7 on all samples.  wuHMM will output the sample name as it is decoding.
 # wuHMM parameters, default parameters listed:
 #    sample_labels (required): must be same as samples$sample_name used in loadSamples.
@@ -48,13 +51,15 @@ DBA_2J
 > dim(cnvs7)
 [1] 25  9
 
-# Merge CNVs into CNV-regions (CNVRs).  
-# Assign each CNVR an identifier starting with strID.
+# Merge CNVs into CNV-regions (CNVRs).  Assign each CNVR an identifier starting with strID.
 > cnvrs7<-makeCNVRs(cnvs7, strID=1)
 > dim(cnvrs7[[1]])
 [1] 17  6
+}}}
 
-# Genotype CNVRs.
 
+===Genotype CNVRs===
+Each sample is assigned an inferred genotype based on the optimal partitioning of the data .
+{{{
 > g7<-w_genotype(samples$sample_name, cnvrs7[[2]], cnvrs7[[1]])
 }}}
