@@ -60,7 +60,11 @@ DBA_2J
 ...
 
 # Plot a CNV.
- 
+# Parameters (required): sample_name, cnv
+# Other parameters, margin size, y-axis boundaries, etc, can be found in plotting.R.
+# plotReg will display all cnvs supplied if they are within margin distance of the first CNV.
+> plotReg("C58_J", cnvs7[1,])
+
 }}}
 http://wuhmm.googlecode.com/files/cnv7_36.gif
 
