@@ -1,9 +1,6 @@
 #summary How to use wuHMM to analyze CGH data.
 
-The example R session below describes the process of loading NimbleGen aCGH data files, analyzing the data with wuHMM, and plotting the results.  The data files used in the examples below are available for download from [http://compbio.s3.amazonaws.com/demoData.zip here].  Download and decompress (unzip) the compressed demo data file in the same directory that you placed the wuHMM code files.
-
-
-This data is also available at GEO under accession GSM135508.
+The example R session below describes the process of loading NimbleGen aCGH data files, analyzing the data with wuHMM, and plotting the results.  The data files used in the examples below are available for download from [http://compbio.s3.amazonaws.com/demoData.zip here].  Download and decompress (unzip) the compressed demo data file in the same directory that you placed the wuHMM code files.  This data is also available at GEO under accession [http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE5805 GSE5805].
  
 
 Launch R.   The following R commands will get you started reading NimbleGen data, and detecting and plotting CNV predictions.  Lines begining with '>' are commands, '#' are comments.
