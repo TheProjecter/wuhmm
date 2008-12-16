@@ -1,0 +1,27 @@
+for line in clustsfile:
+    l=line.split("\t");
+    clusts.append(int(l[2]));
+    positions.append(float(l[0]));
+    signals.append(float(l[1]));
+
+n_s2 = ghmm.EmissionSequence(i_alph, clusts)
+
+#print str(model.loglikelihood(n_s2))
+
+old = model.loglikelihood(n_s2)
+for k in range(iterations):
+    model.baumWelch(n_s2, 1, 0.01)
+    n = model.loglikelihood(n_s2)
+#    print str(abs(old - n))
+    if abs(old - n) < lthresh:
+        break;
+
+    old = n
+
+path,logp = model.viterbi(n_s2)
+states = list()
+for state in path:
+    states.append(dict[state])
+
+def_cnps(fname_cnv, sample_label,positions, signals, states, ab_states)
+print str(model.loglikelihood(n_s2))
