@@ -32,11 +32,8 @@ w_makeCNVRs<-function(calls,strID=1){
   cnvBag<-list();
   
   for(chr in chrs){
-    cat(chr,"\n");
     callsX<-calls[calls$chr==chr,];
-    cat(nrow(callsX),"\n");
     x<-makeCNVRs(callsX, strID);
-    cat("ok1\n");
     cnvrs<-rbind(cnvrs,x[[1]]);
     for(cnvrid in cnvrs$cnvrid){
       cnvBag[[cnvrid]]<-x[[2]][[cnvrid]];
