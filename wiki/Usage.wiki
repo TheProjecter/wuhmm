@@ -51,10 +51,21 @@ DBA_2J
 > dim(cnvs7)
 [1] 25  9
 
+# List first 3 CNVs order by str
+> cnvs7[order(cnvs7$str),][1:3,]
+         str      stp num_probes   mean_sig    score     noise median_sig chr name
+112  6413122  8404697         47 -0.5714043 2.456394 0.2677412     -0.638   7 Balb_cByJ
+117  9109176  9545727         40 -0.7248250 2.596971 0.2780237     -0.704   7 C58_J
+215 11668917 12171962         19 -0.4992105 1.572330 0.3283936     -0.534   7 C58_J
+...
+
 # Merge CNVs into CNV-regions (CNVRs).  Assign each CNVR an identifier starting with strID.
 > cnvrs7<-makeCNVRs(cnvs7, strID=1)
+# makeCNVRs 
 > dim(cnvrs7[[1]])
 [1] 17  6
+
+
 }}}
 
 
