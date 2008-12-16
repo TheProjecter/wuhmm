@@ -15,10 +15,4 @@ The R _cluster_ and _geneplotter_ packages, obtainable from CRAN and BioConducto
 Python 2.4: This should be included with you Linux distribution.  If not, go to python.org to get a copy.
 ghmm:  This library is available from sourceforge and installation instructions are available at ghmm.org.  This installation can be a bit complicated so I posted my installation notes here.  NOTE: You should replace model.c with a modified version which is available here.  This should be done *BEFORE* running the installation script.
 
-Download the most recent wuHMM code from the _Source_ tab above.  The example R session below describes the process of loading NimbleGen aCGH data files, analyzing the data with wuHMM, and plotting the results.  The data files used in the examples below are available for download from the following links.  Place all data files in the same directory that you placed the wuHMM code files.
-
-This data is also available at GEO under accession GSM135508.  Downloaded d_129x1.zip, unzip it in the same directory that you put wuHMM.  The NimbleGen-formatted data file (79035_normalized.txt in the example below) is available upon request.
-
- 
-
-Launch R.   The following R commands will get you started reading NimbleGen data, and detecting and plotting CNV predictions.  Lines begining with '>' are commands, '#' are comments.
+Download the most recent wuHMM code from the _Source_ tab above.  
