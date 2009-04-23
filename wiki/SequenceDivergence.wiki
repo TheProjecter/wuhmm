@@ -4,13 +4,13 @@ Using an HMM for detecting regions of sequence divergence between two genomes
 
 wuHMM can utilize sequence divergence to reduce the CNV false positive rate.  To accomplish this, the algorithm needs to be supplied with regions that are deemed 'divergent' from the reference genome.  Below are instructions for one method to estimate such regions given dense genotype calls.
 
-[forSeqDiver.R]
+Code: [http://wuhmm.googlecode.com/files/forSeqDiver.R]
 
 Sample input files:
 
-[[samp_17_chr18.txt]]
+Genotypes for sample 1: [http://wuhmm.googlecode.com/files/samp_7_chr18.txt]
 
-[[samp_7_chr18.txt]]
+Genotypes for sample 2: [http://wuhmm.googlecode.com/files/samp_17_chr18.txt]
 
 
 Input genotype files should be tab-delimited text files of the format (NO HEADER):
@@ -37,7 +37,7 @@ Launch R and load the necessary functions:
 > source("forSeqDiver.R")
 
 # now run HMM on chr 18
-> assignBlocks(chr=18,slabel=17,"isnp_17_chr18.txt","isnp_7_chr18.txt", min_states=5)
+> assignBlocks(chr=18,slabel=17,"samp_17_chr18.txt","samp_7_chr18.txt", min_states=5)
 
 # by default, output will be written to file 'seqdiver_7_chr18.txt':
 #str    stop    num SNPs  state (0=divergent, 1=similar, 2=No calls)
@@ -49,5 +49,3 @@ Launch R and load the necessary functions:
 4637373 4645616 46      0
 
 }}}
-
-
