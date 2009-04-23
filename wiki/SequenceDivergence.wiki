@@ -1,0 +1,8 @@
+#Brief instructions for using the sequence divergence HMM
+
+= Introduction =
+
+wuHMM can utilize sequence divergence to reduce the CNV false positive rate.  To accomplish this, the algorithm needs to be supplied with regions that are deemed 'divergent' from the reference genome.  Below are instructions for one method to estimate such regions given dense genotype calls.
+
+= Details =
+
