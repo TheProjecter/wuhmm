@@ -4,7 +4,7 @@ Using an HMM for detecting regions of sequence divergence between two genomes
 
 wuHMM can utilize sequence divergence to reduce the CNV false positive rate.  To accomplish this, the algorithm needs to be supplied with regions that are deemed 'divergent' from the reference genome.  Below are instructions for one method to estimate such regions given dense genotype calls.
 
-[[forSeqDiver.R]]
+[forSeqDiver.R]
 
 Sample input files:
 
@@ -49,7 +49,5 @@ Launch R and load the necessary functions:
 4637373 4645616 46      0
 
 }}}
-
-
 
 
