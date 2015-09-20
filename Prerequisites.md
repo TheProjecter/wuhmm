@@ -1,0 +1,5 @@
+  * R 1.5 (or more recent):  If you don't already have R installed, go to [CRAN](http://cran.r-project.org/) where you can grab a copy.
+  * The R _cluster_ package, obtainable from [CRAN](http://cran.r-project.org/).
+  * The R _geneplotter_ package, available from [BioConductor](http://www.bioconductor.org/).
+  * Python 2.4: This should be included with you Linux distribution.  If not, go to [python.org](http://python.org/) to get a copy.
+  * _ghmm_:  This library is available from [sourceforge](http://sourceforge.net/projects/ghmm/) and installation instructions are available at [ghmm.org](http://ghmm.sourceforge.net/installation.html).  This installation can be a bit complicated so I posted my installation notes [here](http://code.google.com/p/wuhmm/wiki/ghmm).  NOTE: You should replace model.c [this modified version](http://wuhmm.googlecode.com/files/model.c).  This should be done **BEFORE** running the installation script.
